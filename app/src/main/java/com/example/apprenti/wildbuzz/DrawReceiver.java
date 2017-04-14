@@ -84,6 +84,7 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Quelque chose ne fonctionne pas...", Toast.LENGTH_LONG).show();
         }
 
+            //pour git
 
     }
 
