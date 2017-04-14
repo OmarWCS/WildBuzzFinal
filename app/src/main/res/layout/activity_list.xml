@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.apprenti.wildbuzz.List">
+
+
+    <TextView
+        android:id="@+id/textViewChooseChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/textlist"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/vertWCS"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonChallengeA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <ImageButton
+        android:id="@+id/buttonChallengeA"
+        android:layout_width="248dp"
+        android:layout_height="98dp"
+        android:layout_below="@+id/buttonChallengeB"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="72dp"
+        android:backgroundTint="@color/vertWCS"
+        android:elevation="12dp"
+        android:src="@drawable/photoedt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonChallengeB"
+        android:layout_width="251dp"
+        android:layout_height="102dp"
+        android:layout_below="@+id/buttonChallengeC"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="21dp"
+        android:backgroundTint="@color/vertWCS"
+        android:elevation="12dp"
+        android:src="@drawable/pas"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChallengeA" />
+
+    <ImageButton
+        android:id="@+id/buttonChallengeC"
+        android:layout_width="244dp"
+        android:layout_height="101dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/buttonChallengeB"
+        android:layout_alignLeft="@+id/buttonChallengeB"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:elevation="12dp"
+        android:src="@drawable/pica"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChallengeB"
+        app:layout_constraintVertical_bias="0.183"
+        app:srcCompat="@drawable/pica" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:elevation="12dp"
+        app:itemBackground="@color/orangeWCS"
+        app:itemIconTint="@drawable/nav_item_color"
+        app:itemTextColor="@drawable/nav_item_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav" />
+
+
+
+</android.support.constraint.ConstraintLayout>

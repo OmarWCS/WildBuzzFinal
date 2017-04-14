@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.apprenti.wildbuzz.ChallengeB">
+
+
+    <Button
+        android:id="@+id/buttonParticipationWalk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:background="@color/vertWCS"
+        android:elevation="15dp"
+        android:padding="10dp"
+        android:text="@string/buttonParticipationWalk"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textViewWalk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textViewTitreWalk"
+        android:layout_alignLeft="@+id/textViewTitreWalk"
+        android:layout_marginTop="12dp"
+        android:text="@string/walk_on_the_wild"
+        android:textColor="@color/vertWCS"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/textViewTitreWalk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="81dp"
+        android:text="@string/textViewTitreWalk"
+        android:textSize="20sp"
+        android:textColor="@color/grisWCS"
+        android:layout_above="@+id/buttonParticipationWalk"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewDescriptionWalk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonParticipationWalk"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/textViewDescriptionWalk"
+        android:textAlignment="center"
+        android:textColor="@color/grisWCS"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewTitreWalk"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="65dp"
+        app:srcCompat="@drawable/pas" />
+
+</RelativeLayout>
