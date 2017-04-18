@@ -41,10 +41,9 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
         mButtonUpload = (ImageButton) findViewById(R.id.upload_btn);
         mImageResult = (ImageView) findViewById(R.id.imageViewDrawResult);
 
-        String path = getIntent().getStringExtra("path");
-        mFilePath = Uri.parse(path);
+        mFilePath = (Uri) getIntent().getParcelableExtra("path");
 
-        mImageResult.setImageBitmap(BitmapFactory.decodeFile(path));
+        mImageResult.setImageBitmap(BitmapFactory.decodeFile(mFilePath.getPath()));
 
         mButtonUpload.setOnClickListener(this);
 
