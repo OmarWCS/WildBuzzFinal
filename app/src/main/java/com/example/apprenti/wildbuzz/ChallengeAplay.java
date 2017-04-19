@@ -19,6 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -30,7 +37,9 @@ public class ChallengeAplay extends AppCompatActivity {
     TextView button;
     ImageView imageView;
     StorageReference myrefernce;
-
+    private static String displayName;
+    private DatabaseReference mDatabase;
+    private static String idUser;
 
     private static final String LOG_TAG = "Barcode Scanner API";
     private static final int PHOTO_REQUEST = 10;
@@ -50,7 +59,11 @@ public class ChallengeAplay extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         scan = (TextView) findViewById(R.id.txtContent);
         myrefernce = FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_CONTRIBUTIONS);
         progressDialog = new ProgressDialog(ChallengeAplay.this);
+        displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+
         if (savedInstanceState!=null){
 
 
@@ -98,17 +111,50 @@ public class ChallengeAplay extends AppCompatActivity {
             try {
                 Scanner scanner = new Scanner();
                 final Bitmap bitmap = scanner.decodeBitmapUri(ChallengeAplay.this, imageuri);
-                progressDialog.setTitle("Uploading..");
+                progressDialog.setTitle("Chargement de la photo..");
                 progressDialog.show();
-                StorageReference filepath = myrefernce.child("photos").child(imageuri.getLastPathSegment())
-                        .child("ecole");
+
+                StorageReference filepath = myrefernce.child("photos/challengeA/").child(imageuri.getLastPathSegment());
+    //rajouter .child (displayName) quand il sera défini après le chemin myrefernce.child("photos/challengeA/") et .child (image uri) etc
                 filepath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                         imageView.setImageBitmap(bitmap);
-                        Toast.makeText(ChallengeAplay.this,"uploaded",Toast.LENGTH_LONG).show();
-                        scan.setText("Image just uploaded on Firebase");
+                        mDatabase.addChildEventListener(new ChildEventListener() {
+
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                // if (s == displayName) {
+                                int valeurDuCompteur = dataSnapshot.getValue(Integer.class);
+                                valeurDuCompteur++;
+                                dataSnapshot.getRef().setValue(valeurDuCompteur);
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        Toast.makeText(ChallengeAplay.this,"enregistré",Toast.LENGTH_LONG).show();
+                        scan.setText("Image enregistrée sur Firebase");
                         progressDialog.dismiss();
+
                     }
                 });
 
