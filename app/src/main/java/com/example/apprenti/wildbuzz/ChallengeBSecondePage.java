@@ -1,11 +1,14 @@
 package com.example.apprenti.wildbuzz;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ public class ChallengeBSecondePage extends AppCompatActivity implements SensorEv
     TextView textViewCount;
     SensorManager sensorManager;
     boolean running = false;
+    Button buttonResults;
 
     StepsCounter mStepsCounter;
     private DatabaseReference mDatabase;
@@ -34,21 +38,29 @@ public class ChallengeBSecondePage extends AppCompatActivity implements SensorEv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_bseconde_page);
 
-
+        buttonResults = (Button)findViewById(R.id.buttonResults);
+        buttonResults.setOnClickListener(new View.OnClickListener() {
+            //intent bidon vers profile
+            public void onClick(View v) {
+                Intent goResults = new Intent(ChallengeBSecondePage.this, ChallengeBResults.class);
+                startActivity(goResults);
+            }
+        });
 
 
         textViewCount = (TextView)findViewById(R.id.textViewCount);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mDatabase = FirebaseDatabase.getInstance().getReference("Steps/" +"walk/" + displayName + idUser);
+
 
         mStepsCounter = new StepsCounter(0);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        uploadId = mDatabase.getKey();
 
+        mDatabase = FirebaseDatabase.getInstance().getReference("Walk");
+        uploadId = mDatabase.push().getKey();
     }
 
     @Override
@@ -77,7 +89,9 @@ public class ChallengeBSecondePage extends AppCompatActivity implements SensorEv
 
             mStepsCounter.steps += event.values[0];
 
-            mDatabase.child("walk").child(displayName).child(uploadId).setValue(mStepsCounter.steps);
+            if (mStepsCounter.steps>= 25) {
+                mDatabase.child(displayName).setValue(mStepsCounter.steps);
+            }
         }
     }
 
@@ -85,5 +99,7 @@ public class ChallengeBSecondePage extends AppCompatActivity implements SensorEv
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
+
 
 }
