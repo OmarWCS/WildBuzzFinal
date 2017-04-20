@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -28,8 +31,9 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
     private static final int PICK_IMAGE_REQUEST = 12 ;
     private ImageButton mButtonUpload;
     private ImageView mImageResult;
-
     private Uri mFilePath;
+    private DatabaseReference mDatabase;
+    private static String displayName;
 
     private StorageReference mStorageReference;
 
@@ -40,12 +44,10 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
         mStorageReference = FirebaseStorage.getInstance().getReference();
         mButtonUpload = (ImageButton) findViewById(R.id.upload_btn);
         mImageResult = (ImageView) findViewById(R.id.imageViewDrawResult);
-
-        String path = getIntent().getStringExtra("path");
-        mFilePath = Uri.parse(path);
-
-        mImageResult.setImageBitmap(BitmapFactory.decodeFile(path));
-
+        mFilePath = (Uri) getIntent().getParcelableExtra("path");
+        mImageResult.setImageBitmap(BitmapFactory.decodeFile(mFilePath.getPath()));
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Draws");
+        displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         mButtonUpload.setOnClickListener(this);
 
     }
@@ -57,11 +59,13 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
 
         if (mFilePath != null) {
 
-            ProgressDialog mProgressDialog = new ProgressDialog(this);
+            final ProgressDialog mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setTitle("envoi de ton dessin");
             mProgressDialog.show();
 
-            StorageReference drawRef = mStorageReference.child("photos").child("toto.jpg");
+            StorageReference drawRef = mStorageReference.child("images").child("schools").child(displayName).child(mFilePath.getLastPathSegment());
+            mDatabase = FirebaseDatabase.getInstance().getReference("images");
+
 
             if (!new File(mFilePath.getPath()).exists()) {
                 return;
@@ -72,6 +76,7 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(getApplicationContext(), "Dessin envoyé !", Toast.LENGTH_LONG).show();
+                            mProgressDialog.dismiss();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -84,10 +89,7 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Quelque chose ne fonctionne pas...", Toast.LENGTH_LONG).show();
         }
 
-            //pour git
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,6 +128,7 @@ public class DrawReceiver extends AppCompatActivity implements View.OnClickListe
 
         if (v == mButtonUpload) {
             uploadDraw();
+            mDatabase.child(displayName);
         }
     }
 
