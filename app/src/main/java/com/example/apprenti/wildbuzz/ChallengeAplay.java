@@ -115,7 +115,7 @@ public class ChallengeAplay extends AppCompatActivity {
                 progressDialog.show();
 
                 StorageReference filepath = myrefernce.child("photos/challengeA/").child(imageuri.getLastPathSegment());
-    //rajouter .child (displayName) quand il sera défini après le chemin myrefernce.child("photos/challengeA/") et .child (image uri) etc
+
                 filepath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -123,12 +123,10 @@ public class ChallengeAplay extends AppCompatActivity {
                         imageView.setImageBitmap(bitmap);
                         mDatabase.addChildEventListener(new ChildEventListener() {
 
+
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                // if (s == displayName) {
-                                int valeurDuCompteur = dataSnapshot.getValue(Integer.class);
-                                valeurDuCompteur++;
-                                dataSnapshot.getRef().setValue(valeurDuCompteur);
+
                             }
 
                             @Override
