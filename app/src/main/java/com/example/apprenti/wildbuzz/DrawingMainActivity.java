@@ -3,6 +3,7 @@ package com.example.apprenti.wildbuzz;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -58,7 +59,7 @@ public class DrawingMainActivity extends AppCompatActivity {
             Intent upload = new Intent();
             upload.setClass(DrawingMainActivity.this, DrawReceiver.class);
 
-            String filePath = saveDrawnImage(drawView.getDrawnImage());
+            Uri filePath = saveDrawnImage(drawView.getDrawnImage());
             upload.putExtra("path", filePath);
 
             startActivity(upload);
@@ -137,7 +138,7 @@ public class DrawingMainActivity extends AppCompatActivity {
         }
     }
 
-    private String saveDrawnImage(Bitmap bmp) {
+    private Uri saveDrawnImage(Bitmap bmp) {
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
             return null;
@@ -152,7 +153,7 @@ public class DrawingMainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.d("Draw", "Error accessing file: " + e.getMessage());
         }
-        return pictureFile.getAbsolutePath();
+        return Uri.fromFile(pictureFile);
 
 
     }
