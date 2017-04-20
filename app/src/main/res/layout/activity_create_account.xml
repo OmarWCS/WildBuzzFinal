@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewEmailUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextEmailUser"
+        android:layout_centerHorizontal="true"
+        android:text="@string/signup_email" />
+
+    <TextView
+        android:id="@+id/textViewPasswordUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextPasswordUser"
+        android:layout_centerHorizontal="true"
+        android:text="@string/signup_password" />
+
+    <EditText
+        android:id="@+id/editTextPasswordUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextEmailUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:layout_above="@+id/editTextPasswordUser"
+        android:layout_alignLeft="@+id/editTextPasswordUser"
+        android:layout_alignStart="@+id/editTextPasswordUser"
+        android:layout_marginBottom="45dp" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewSignin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp"
+        android:background="@color/orangeWCS"
+        android:elevation="15dp"
+        android:padding="10dp"
+        android:text="@string/sign"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textViewSignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Retour"
+        android:textAlignment="center" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="29dp"
+        android:layout_toStartOf="@+id/editTextEmailUser"
+        android:layout_alignRight="@+id/textViewEmailUser"
+        android:layout_alignEnd="@+id/textViewEmailUser">
+
+        <RadioButton
+            android:id="@+id/radioButtonLaLoupe"
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:elevation="1dp"
+            android:text="La loupe"
+            android:textColor="@color/grisWCS" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLyon"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Lyon"
+            android:textColor="@color/grisWCS" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBordeaux"
+            android:layout_width="179dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Bordeaux"
+            android:textColor="@color/grisWCS" />
+
+    </RadioGroup>
+
+    <RadioButton
+        android:id="@+id/radioButtonOrlean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editTextEmailUser"
+        android:layout_alignRight="@+id/editTextEmailUser"
+        android:layout_alignTop="@+id/radioGroup"
+        android:layout_weight="1"
+        android:text="Orléans"
+        android:textColor="@color/grisWCS" />
+
+    <RadioButton
+        android:id="@+id/radioButtonFontainebleau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/radioButtonOrlean"
+        android:layout_alignStart="@+id/radioButtonOrlean"
+        android:layout_below="@+id/radioButtonOrlean"
+        android:layout_weight="1"
+        android:text="Fontainebleau"
+        android:textColor="@color/grisWCS" />
+
+    <RadioButton
+        android:id="@+id/radioButtonToulouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/radioButtonFontainebleau"
+        android:layout_alignStart="@+id/radioButtonFontainebleau"
+        android:layout_below="@+id/radioButtonFontainebleau"
+        android:layout_weight="1"
+        android:text="Toulouse"
+        android:textColor="@color/grisWCS" />
+</RelativeLayout>
