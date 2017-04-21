@@ -30,7 +30,7 @@ public class ChallengeBResults extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Walk");
         mResults = (ListView)findViewById(R.id.ListViewResults);
 
-        final ArrayAdapter<Double> arrayAdapter = new ArrayAdapter<Double>(this, android.R.layout.simple_list_item_2, mTownResults);
+        final ArrayAdapter<Double> arrayAdapter = new ArrayAdapter<Double>(this, android.R.layout.simple_list_item_1, mTownResults);
         mResults.setAdapter(arrayAdapter);
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
